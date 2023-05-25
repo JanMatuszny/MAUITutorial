@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mauiTutorial="clr-namespace:MAUITutorial"
+             x:Class="MAUITutorial.DeveloperPage"
+             x:DataType="mauiTutorial:DeveloperPageViewModel"
+             Title="Developer Page">
+    
+    <VerticalStackLayout Spacing="10"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center">
+        
+        <HorizontalStackLayout HorizontalOptions="Center">
+            
+            <Label Text="I received "/>
+            <Label Text="{Binding Counter}"/>
+            <Label Text=" clicks."/>
+            
+        </HorizontalStackLayout>
+    
+        <Button Text="Go Back"
+                Command="{Binding GoBackCommand}"/>
+    
+    </VerticalStackLayout>
+    
+</ContentPage>

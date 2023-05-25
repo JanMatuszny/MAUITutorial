@@ -1,11 +1,14 @@
-﻿namespace MAUITutorial;
+﻿using MAUITutorial.Abstractions;
+using Microsoft.Maui.Controls;
+
+namespace MAUITutorial;
 
 public partial class App : Application
 {
-    public App()
+    public App(INavigationService navigationService)
     {
         InitializeComponent();
-
-        MainPage = new AppShell();
+        MainPage = new NavigationPage();
+        navigationService.NavigateToPage<MainPage>();
     }
 }
