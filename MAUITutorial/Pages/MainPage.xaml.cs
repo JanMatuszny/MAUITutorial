@@ -1,6 +1,6 @@
-﻿using Microsoft.Maui.Controls;
+﻿using MAUITutorial.ViewModels;
 
-namespace MAUITutorial;
+namespace MAUITutorial.Pages;
 
 public partial class MainPage : ContentPage
 {

@@ -1,8 +1,9 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MAUITutorial.Abstractions;
+using MAUITutorial.Pages;
 
-namespace MAUITutorial;
+namespace MAUITutorial.ViewModels;
 
 public partial class MainPageViewModel : ViewModelBase
 {
@@ -10,12 +11,12 @@ public partial class MainPageViewModel : ViewModelBase
 
     [ObservableProperty]
     private int _counter;
-
-    [RelayCommand]
-    private Task OpenDeveloperPage() => _navigationService.NavigateToPage<DeveloperPage>(Counter);
     
     [RelayCommand]
     private void IncrementCounter() => Counter++;
 
     public MainPageViewModel(INavigationService navigationService) => _navigationService = navigationService;
+    
+    [RelayCommand]
+    private Task OpenDeveloperPage() => _navigationService.NavigateToPage<DeveloperPage>(Counter);
 }

@@ -49,6 +49,30 @@ public class NavigationService : INavigationService
             throw new InvalidOperationException($"Unable to resolve type {typeof(T).FullName}");
         }
     }
+    public async Task NavigateToPageModal<T>(object? parameter) where T : ContentPage
+    {
+        var toPage = ResolvePage<T>();
+
+        if (toPage is not null)
+        {
+            toPage.NavigatedTo += OnPageNavigatedTo;
+            
+            var toViewModel = GetPageViewModelBase(toPage);
+
+            if (toViewModel is not null)
+            {
+                await toViewModel.OnNavigatingTo(parameter);
+            }
+
+            await Navigation.PushModalAsync(toPage, true);
+
+            toPage.NavigatedFrom += OnPageNavigatedFrom;
+        }
+        else
+        {
+            throw new InvalidOperationException($"Unable to resolve type {typeof(T).FullName}");
+        }
+    }
 
     public async Task NavigateToPage<T>() where T : ContentPage
     {
@@ -69,8 +93,10 @@ public class NavigationService : INavigationService
 
             toPage.NavigatedFrom += OnPageNavigatedFrom;
         }
-
-        throw new InvalidOperationException($"Unable to resolve type {typeof(T).FullName}");
+        else
+        {
+            throw new InvalidOperationException($"Unable to resolve type {typeof(T).FullName}");
+        }
     }
 
     private ViewModelBase? GetPageViewModelBase(ContentPage page)
@@ -127,7 +153,17 @@ public class NavigationService : INavigationService
             return Navigation.PopAsync();
         }
 
-        throw new InvalidOperationException("No pages to navigate back to1");
+        throw new InvalidOperationException("No pages to navigate back to!");
+    }
+    
+    public Task NavigateBackModal()
+    {
+        if (Navigation.ModalStack.Count > 0)
+        {
+            return Navigation.PopModalAsync();
+        }
+
+        throw new InvalidOperationException("No pages to navigate back to!");
     }
 
     private T? ResolvePage<T>() where T : ContentPage => _services.GetService<T>();

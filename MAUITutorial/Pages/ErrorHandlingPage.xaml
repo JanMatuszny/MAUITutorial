@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:MAUITutorial.ViewModels"
+             x:Class="MAUITutorial.Pages.ErrorHandlingPage"
+             x:DataType="viewModels:ErrorHandlingPageViewModel"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="False"
+             Title="Error Handling Page">
+    
+    <Grid>
+        
+        <VerticalStackLayout HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Spacing="10">
+            
+            <Button Text="Failed action"
+                    Command="{Binding FailActionCommand}" />
+            
+            
+            <Button Text="Failed opening page"
+                    Command="{Binding FailOpeningPageCommand}" />
+            
+        </VerticalStackLayout>
+        
+        <ActivityIndicator IsRunning="{Binding IsRunning}"
+                           BackgroundColor="#33000000"/>
+        
+    </Grid>
+    
+</ContentPage>
